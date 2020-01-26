@@ -86,7 +86,7 @@ Same with a custom `Document`:
 
 ```patch
  import Document from "next/document"
-+import createEmotionDocument from "@cprecioso/next-emotion-ssr/app"
++import createEmotionDocument from "@cprecioso/next-emotion-ssr/document"
  ...
 -class MyDocument extends Document {
 +class MyDocument extends createEmotionDocument(Document) {
