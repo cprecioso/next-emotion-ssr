@@ -1,0 +1,6 @@
+{
+  "extends": "@cprecioso/tsconfig/node",
+  "include": ["src/**/*"],
+  "exclude": [],
+  "compilerOptions": { "jsx": "react", "outDir": ".", "declaration": true }
+}

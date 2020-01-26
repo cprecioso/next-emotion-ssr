@@ -1,0 +1,51 @@
+{
+  "name": "@cprecioso/next-emotion-ssr",
+  "version": "0.0.1",
+  "devDependencies": {
+    "@cprecioso/tsconfig": "^0.0.4",
+    "@emotion/core": "^10.0.27",
+    "@types/react": "^16.9.19",
+    "next": "^9.2.1",
+    "react": "^16.12.0",
+    "typescript": "^3.7.5"
+  },
+  "dependencies": {
+    "@emotion/cache": "^10.0.27",
+    "create-emotion-server": "^10.0.27"
+  },
+  "peerDependencies": {
+    "@emotion/core": "^10.0.27",
+    "next": "^9.2.1",
+    "react": "^16.12.0"
+  },
+  "main": "./cache.js",
+  "types": "./cache.d.ts",
+  "files": [
+    "*.js",
+    "*.d.ts"
+  ],
+  "description": "Advanced Emotion SSR for Next.js",
+  "scripts": {
+    "prepare": "tsc -p ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cprecioso/next-emotion.git"
+  },
+  "keywords": [
+    "next",
+    "emotion",
+    "ssr",
+    "css",
+    "css-in-js",
+    "style",
+    "styled",
+    "advanced"
+  ],
+  "author": "Carlos Precioso <kalprestito@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cprecioso/next-emotion/issues"
+  },
+  "homepage": "https://github.com/cprecioso/next-emotion#readme"
+}
