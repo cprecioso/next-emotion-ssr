@@ -26,9 +26,10 @@ const createEmotionDocument = (
       initialProps.styles = (
         <Fragment>
           {initialProps.styles}
-          <style data-emotion-css={critical.ids.join(" ")}>
-            {critical.css}
-          </style>
+          <style
+            data-emotion-css={critical.ids.join(" ")}
+            dangerouslySetInnerHTML={{ __html: critical.css }}
+          />
         </Fragment>
       )
 
