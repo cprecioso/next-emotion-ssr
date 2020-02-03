@@ -1,6 +1,6 @@
 {
   "name": "@cprecioso/next-emotion-ssr",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "devDependencies": {
     "@cprecioso/tsconfig": "^0.0.4",
     "@emotion/core": "^10.0.27",
