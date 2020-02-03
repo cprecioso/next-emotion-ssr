@@ -50,51 +50,16 @@ Setup `@emotion/core` normally.
 Then create a `pages/_app.jsx` or `pages/_app.tsx` file and write:
 
 ```typescript
-import createEmotionApp from "@cprecioso/next-emotion-ssr/app"
-import App from "next/app"
+import { EmotionApp } from "@cprecioso/next-emotion-ssr/app"
 
-export default createEmotionApp(App)
+export default EmotionApp
 ```
 
 Similarly, create a `pages/_document.jsx` or `pages/_document.tsx` file and
 write:
 
 ```typescript
-import createEmotionDocument from "@cprecioso/next-emotion-ssr/document"
-import Document from "next/document"
+import { EmotionDocument } from "@cprecioso/next-emotion-ssr/document"
 
-export default createEmotionDocument(Document)
+export default EmotionDocument(Document)
 ```
-
-### Advanced
-
-If you already created a custom `App`, just subclass your component from the
-wrapped Emotion version instead of the original Next one, like this:
-
-```patch
- import App from "next/app"
-+import createEmotionApp from "@cprecioso/next-emotion-ssr/app"
- ...
--class MyApp extends App {
-+class MyApp extends createEmotionApp(App) {
- ...
- }
- export default MyApp
-```
-
-Same with a custom `Document`:
-
-```patch
- import Document from "next/document"
-+import createEmotionDocument from "@cprecioso/next-emotion-ssr/document"
- ...
--class MyDocument extends Document {
-+class MyDocument extends createEmotionDocument(Document) {
- ...
- }
- export default MyDocument
-```
-
-> If you need to access the cache we're using, just
-> `import { cache } from "@cprecioso/next-emotion-ssr"`. There are few reasons
-> why you'd need to do this.
