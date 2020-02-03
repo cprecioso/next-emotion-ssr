@@ -16,4 +16,6 @@ const createEmotionApp = (NextApp: typeof App): AppComponent => props => (
   </CacheProvider>
 )
 
-export default createEmotionApp
+const EmotionApp = createEmotionApp(App)
+
+export { createEmotionApp as default, createEmotionApp, EmotionApp }

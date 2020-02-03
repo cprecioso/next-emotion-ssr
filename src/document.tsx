@@ -37,4 +37,10 @@ const createEmotionDocument = (
     }
   }
 
-export default createEmotionDocument
+const EmotionDocument = createEmotionDocument(Document)
+
+export {
+  createEmotionDocument as default,
+  createEmotionDocument,
+  EmotionDocument
+}
