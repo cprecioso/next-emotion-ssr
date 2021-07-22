@@ -2,7 +2,7 @@
 
 This package encapsulates the
 [Advanced Approach](https://emotion.sh/docs/ssr#advanced-approach) of doing SSR
-in Emotion 10, adapted for [Next.js](https://nextjs.org/).
+in Emotion 11, adapted for [Next.js](https://nextjs.org/).
 
 The code is quite simple, so if you need more customization (like using a
 [non-default EmotionCache](https://emotion.sh/docs/@emotion/cache)), it's easy
@@ -29,37 +29,44 @@ work out (it did for me!). That's why I created this package.
 
 ## Installing
 
-We assume that you already have `@emotion/core`, `next`, and `react` installed.
-If you don't have them, use this command to install them:
+We assume that you already have `@emotion/react`, `next`, `react`, `react-dom`
+installed. If you don't have them, use this command to install them:
 
 ```sh
-$ yarn add @emotion/core next react
+$ yarn add @emotion/react next react react-dom
 ```
 
 Then install this package with:
 
 ```sh
-$ yarn add --dev @cprecioso/next-emotion-ssr
+$ yarn add @cprecioso/next-emotion-ssr
 ```
 
-## Usage
+If you're only using
+[`@emotion/styled` components](https://emotion.sh/docs/styled), you can stop
+here. However, if you're going to use
+[the `css` prop](https://emotion.sh/docs/css-prop), or want to take advantage of
+the
+[`@emotion/babel-plugin` functionalities](https://emotion.sh/docs/@emotion/babel-plugin),
+you should
+[install and configure them](https://emotion.sh/docs/css-prop#babel-preset).
 
-Setup `@emotion/core` normally.
-[There's an official example available](https://github.com/zeit/next.js/tree/master/examples/with-emotion).
+## Usage
 
 Then create a `pages/_app.jsx` or `pages/_app.tsx` file and write:
 
 ```typescript
-import { EmotionApp } from "@cprecioso/next-emotion-ssr/app"
-
-export default EmotionApp
+export { EmotionApp as default } from "@cprecioso/next-emotion-ssr"
 ```
 
 Similarly, create a `pages/_document.jsx` or `pages/_document.tsx` file and
 write:
 
 ```typescript
-import { EmotionDocument } from "@cprecioso/next-emotion-ssr/document"
-
-export default EmotionDocument(Document)
+export { EmotionDocument as default } from "@cprecioso/next-emotion-ssr"
 ```
+
+> If you have a custom `Document` or `App` already, you can wrap them in the
+> `makeEmotionApp(YourAppComponent)` and
+> `makeEmotionDocument(YourDocumentComponent)` functions exported from the
+> package.

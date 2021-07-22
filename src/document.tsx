@@ -1,46 +1,34 @@
-import createEmotionServer from "create-emotion-server"
-import Document, { DocumentContext, DocumentInitialProps } from "next/document"
-import React, { Fragment } from "react"
+import createEmotionServer from "@emotion/server/create-instance"
+import NextDocument, {
+  DocumentContext,
+  DocumentInitialProps,
+} from "next/document"
 import { cache } from "./cache"
+import { emotionChunksToStyleTags } from "./util"
 
-const { extractCritical } = createEmotionServer(cache)
-
-const createEmotionDocument = (
-  NextDocument: typeof Document
-): typeof Document =>
-  class EmotionDocument extends NextDocument {
+export const makeEmotionDocument: {
+  (): typeof NextDocument
+  <T extends typeof NextDocument>(Document: T): T
+} = (Document = NextDocument) =>
+  class EmotionDocument extends Document {
     static async getInitialProps(
       ctx: DocumentContext
     ): Promise<DocumentInitialProps> {
-      // We get the regular render of the App
+      const { extractCriticalToChunks } = createEmotionServer(cache)
       const initialProps = await super.getInitialProps(ctx)
+      const emotionProps = extractCriticalToChunks(initialProps.html)
 
-      // This removes the style tags of the HTML and concatenates them in a
-      // single CSS string.
-      const critical = extractCritical(initialProps.html)
-
-      // We replace the rendered html with the cleaned up one.
-      initialProps.html = critical.html
-
-      // We add the Emotion CSS to the styles already rendered by Next
-      initialProps.styles = (
-        <Fragment>
-          {initialProps.styles}
-          <style
-            data-emotion-css={critical.ids.join(" ")}
-            dangerouslySetInnerHTML={{ __html: critical.css }}
-          />
-        </Fragment>
-      )
-
-      return initialProps
+      return {
+        ...initialProps,
+        html: emotionProps.html,
+        styles: (
+          <>
+            {initialProps.styles}
+            {emotionChunksToStyleTags(emotionProps)}
+          </>
+        ),
+      }
     }
   }
 
-const EmotionDocument = createEmotionDocument(Document)
-
-export {
-  createEmotionDocument as default,
-  createEmotionDocument,
-  EmotionDocument
-}
+export const EmotionDocument = /*#__PURE__*/ makeEmotionDocument()

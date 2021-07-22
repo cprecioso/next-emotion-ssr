@@ -1,3 +1,13 @@
 node_modules/
 /*.js
 /*.d.ts
+/dist
+
+/.vscode
+
+.yarn/*
+!.yarn/patches
+!.yarn/releases
+!.yarn/plugins
+!.yarn/versions
+.pnp.*
